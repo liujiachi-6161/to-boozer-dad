@@ -1,237 +1,241 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>体育助教 - To Boozer Dad's Sports Work</title>
-  <link rel="stylesheet" href="/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>体育助教系统</title>
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
+<div class="container">
+    <header>
+        <h1>体育助教系统</h1>
+        <div class="sync-box">
+            <button id="syncBtn">云端同步</button>
+            <span id="syncStatus"></span>
+        </div>
+    </header>
 
-  <!-- ===== 顶部导航 ===== -->
-  <header>
-    <div class="logo">
-      <div>
-        <h1>🏃 体育助教</h1>
-        <div class="subtitle">To Boozer Dad's Sports Work</div>
-      </div>
+    <!-- 顶部导航 6个标签 -->
+    <div class="tab-bar">
+        <button class="tab active" data-tab="calendarLog">课堂档案</button>
+        <button class="tab" data-tab="aiChat">AI助教</button>
+        <button class="tab" data-tab="lessonPlan">教案管理</button>
+        <button class="tab" data-tab="activity">课堂活动资源</button>
+        <button class="tab" data-tab="roster">学生名册管理</button>
+        <button class="tab" data-tab="stats">课时出勤统计</button>
     </div>
-    <div style="display:flex;align-items:center;gap:16px;">
-      <div id="syncStatus" class="sync-status">
-        <div class="sync-dot"></div>
-        <span class="sync-text">已同步</span>
-      </div>
-      <div class="nav-tabs">
-        <button class="nav-tab active" data-tab="lesson">课堂档案</button>
-        <button class="nav-tab" data-tab="ai">AI 助教</button>
-        <button class="nav-tab" data-tab="stats">统计</button>
-      </div>
+
+    <!-- ========== 页面1：课堂档案（首页） ========== -->
+    <div class="panel active" id="calendarLog">
+        <div class="row">
+            <!-- 左侧：日历 -->
+            <div class="col-left">
+                <div class="calendar-wrap card">
+                    <div class="cal-header">
+                        <button id="prevMonth">&lt;</button>
+                        <h2 id="calTitle"></h2>
+                        <button id="nextMonth">&gt;</button>
+                    </div>
+                    <div class="cal-week">
+                        <span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span>
+                    </div>
+                    <div id="calDays" class="cal-days"></div>
+                </div>
+            </div>
+
+            <!-- 右侧：当日记录 + 点名 + 手记 -->
+            <div class="col-right">
+                <!-- 当日基本信息 -->
+                <div class="day-info card">
+                    <h3>当日记录：<span id="currentDateShow"></span></h3>
+                    <div class="form-line">
+                        <label>班级：</label>
+                        <select id="classNameSelect">
+                            <option value="">请选择班级（先在名册管理中创建）</option>
+                        </select>
+                    </div>
+                    <div class="form-line">
+                        <label>课时：</label>
+                        <input id="lessonNo" type="text" placeholder="第1课时">
+                    </div>
+                    <div class="form-line">
+                        <label>
+                            <input type="checkbox" id="cancelledCheck"> 本节课取消（停课）
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 顺序点名区 -->
+                <div class="rollcall-block card">
+                    <h4>点名签到</h4>
+                    <div class="rollcall-seq-area" id="rollcallSeqArea">
+                        <div class="seq-placeholder">请先在上方选择班级，然后点击"开始点名"</div>
+                    </div>
+                    <div class="btn-row">
+                        <button id="startRollCallBtn">开始点名</button>
+                        <button id="resetRollCallBtn" class="gray">重新点名</button>
+                        <button id="saveAttendanceBtn">保存本次出勤</button>
+                    </div>
+
+                    <!-- 下方汇总纠错列表 -->
+                    <div class="rollcall-review" id="rollcallReview">
+                        <div class="review-title">出勤明细（点错可在此修正，仅改状态，不能改名单）</div>
+                        <div id="reviewList" class="review-list"></div>
+                    </div>
+                </div>
+
+                <!-- 随堂手记 -->
+                <div class="log-block card">
+                    <h4>随堂手记</h4>
+                    <textarea id="lessonNote" placeholder="记录课堂情况、问题、心得..."></textarea>
+                    <div class="btn-row">
+                        <button id="saveNoteBtn">保存手记</button>
+                    </div>
+                    <div class="saved-ai-log-title">已存档AI教案</div>
+                    <div id="savedAiLogBox"></div>
+                </div>
+            </div>
+        </div>
     </div>
-  </header>
 
-  <!-- ===== 主布局 ===== -->
-  <div class="main-container">
-
-    <!-- 左侧：日历面板 -->
-    <aside class="sidebar">
-      <div class="calendar-header">
-        <h2 id="calendarTitle">2024年1月</h2>
-        <div class="calendar-nav">
-          <button id="prevMonth" title="上个月">‹</button>
-          <button id="todayBtn" title="今天" style="font-size:11px;padding:0 8px;">今天</button>
-          <button id="nextMonth" title="下个月">›</button>
+    <!-- ========== 页面2：AI助教 ========== -->
+    <div class="panel" id="aiChat">
+        <div class="ai-top-bar card">
+            <label>模型选择：
+                <select id="modelSelect">
+                    <option value="deepseek">DeepSeek</option>
+                    <option value="doubao">豆包</option>
+                </select>
+            </label>
         </div>
-      </div>
-      <div class="calendar-grid">
-        <div class="calendar-weekdays" id="calendarWeekdays"></div>
-        <div class="calendar-days" id="calendarDays"></div>
-      </div>
-      <div class="sidebar-info" id="sidebarStats">
-        <div class="stat-row"><span>本月上课</span><span>0 节</span></div>
-        <div class="stat-row"><span>累计上课</span><span>0 节</span></div>
-        <div class="stat-row"><span>学生人数</span><span>0 人</span></div>
-      </div>
-    </aside>
-
-    <!-- 右侧：内容区 -->
-    <main class="content">
-
-      <!-- ===== Tab 1: 课堂档案 ===== -->
-      <div class="content-panel active" id="panel-lesson">
-
-        <!-- 班级 & 课时设置 -->
-        <div class="card">
-          <div class="card-title">
-            📋 课堂信息
-            <span class="date-badge">1月1日 周一</span>
-          </div>
-          <div class="lesson-header">
-            <div class="form-group">
-              <label>班级</label>
-              <input type="text" id="lessonClass" placeholder="如：三年级1班" style="width:160px;">
+        <div id="chatBox" class="chat-box card"></div>
+        <div class="chat-input-area card">
+            <textarea id="chatInput" placeholder="描述你的需求：生成体育课教案、构思课堂游戏..."></textarea>
+            <div class="chat-btn-row">
+                <button id="sendChatBtn">发送提问</button>
+                <button id="saveLastAiBtn" class="gray">将最后AI回答保存至当日记录</button>
             </div>
-            <div class="form-group">
-              <label>课时</label>
-              <input type="text" id="lessonPeriod" placeholder="如：第3节" style="width:120px;">
-            </div>
-          </div>
         </div>
-
-        <!-- 点名签到 -->
-        <div class="card">
-          <div class="card-title">
-            ✅ 点名签到
-            <span class="date-badge">1月1日 周一</span>
-          </div>
-          <div class="rollcall-toolbar">
-            <button class="btn btn-primary btn-sm" id="addStudentBtn">+ 添加学生</button>
-            <button class="btn btn-success btn-sm" id="allPresentBtn">全部出勤</button>
-            <button class="btn btn-danger btn-sm" id="allAbsentBtn">全部缺勤</button>
-            <button class="btn btn-gray btn-sm" id="clearAttendanceBtn">清除标记</button>
-            <button class="btn btn-gray btn-sm" id="randomPickBtn">🎲 随机点名</button>
-          </div>
-          <div class="student-list" id="studentList"></div>
-          <div class="rollcall-summary" id="rollcallSummary"></div>
-          <div style="margin-top:10px;font-size:11px;color:#999;">
-            💡 点击学生卡片切换状态：未标记 → 出勤（绿）→ 缺勤（红）→ 未标记
-          </div>
-        </div>
-
-        <!-- 随堂手记 -->
-        <div class="card">
-          <div class="card-title">
-            📝 随堂手记
-            <span class="date-badge">1月1日 周一</span>
-          </div>
-          <textarea class="log-textarea" id="lessonNotes" placeholder="记录本节课的课堂情况、学生表现、教学反思等...（自动保存）"></textarea>
-        </div>
-
-        <!-- 已保存的AI内容 -->
-        <div class="card">
-          <div class="card-title">
-            📚 已保存的 AI 内容
-            <span class="date-badge">1月1日 周一</span>
-          </div>
-          <div id="savedAIContainer"></div>
-        </div>
-
-      </div>
-
-      <!-- ===== Tab 2: AI 助教 ===== -->
-      <div class="content-panel" id="panel-ai">
-        <div class="chat-layout">
-          <div class="chat-toolbar">
-            <div class="model-selector">
-              <span>模型：</span>
-              <select id="modelSelect">
-                <option value="doubao">豆包</option>
-                <option value="deepseek">DeepSeek</option>
-              </select>
-            </div>
-            <button class="btn btn-gray btn-sm" id="saveToLessonBtn">💾 保存到当日记录</button>
-            <button class="btn btn-gray btn-sm" id="clearChatBtn">🗑 清空对话</button>
-          </div>
-
-          <!-- 快捷提问 -->
-          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
-            <button class="btn btn-gray btn-sm quick-prompt" data-prompt="帮我写一份小学三年级体育课教案，内容是立定跳远">📝 立定跳远教案</button>
-            <button class="btn btn-gray btn-sm quick-prompt" data-prompt="给我推荐5个适合小学体育课的热身小游戏，要说明规则和器材">🎮 热身小游戏</button>
-            <button class="btn btn-gray btn-sm quick-prompt" data-prompt="小学生跑步训练有哪些安全注意事项？">⚠️ 安全注意</button>
-            <button class="btn btn-gray btn-sm quick-prompt" data-prompt="帮我设计一节体育课的放松活动，5分钟左右">🧘 放松活动</button>
-          </div>
-
-          <div class="chat-messages" id="chatMessages"></div>
-
-          <div class="chat-input-area">
-            <textarea id="chatInput" rows="1" placeholder="输入你的需求，比如：帮我写一份四年级跳绳教案...（Enter发送，Shift+Enter换行）"></textarea>
-            <button class="btn btn-primary" id="sendBtn">发送</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- ===== Tab 3: 统计 ===== -->
-      <div class="content-panel" id="panel-stats">
-        <div class="stats-grid">
-          <div class="stat-card">
-            <div class="stat-number" id="statTotalLessons">0</div>
-            <div class="stat-label">累计上课节数</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-number" id="statTotalStudents">0</div>
-            <div class="stat-label">学生人数</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-number" id="statTotalPresent" style="color:#27ae60;">0</div>
-            <div class="stat-label">累计出勤人次</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-number" id="statTotalAbsent" style="color:#e74c3c;">0</div>
-            <div class="stat-label">累计缺勤人次</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-number" id="statAttendanceRate" style="color:#f39c12;">0%</div>
-            <div class="stat-label">平均出勤率</div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-title">📊 各班级出勤统计</div>
-          <table class="stats-table">
-            <thead>
-              <tr>
-                <th>班级</th>
-                <th>上课节数</th>
-                <th>出勤人次</th>
-                <th>缺勤人次</th>
-                <th>出勤率</th>
-              </tr>
-            </thead>
-            <tbody id="classStatsBody"></tbody>
-          </table>
-        </div>
-
-        <div class="card">
-          <div class="card-title">⚙️ 数据管理</div>
-          <div style="display:flex;gap:10px;flex-wrap:wrap;">
-            <button class="btn btn-gray btn-sm" id="manualSyncBtn">🔄 手动同步云端</button>
-            <button class="btn btn-gray btn-sm" id="exportDataBtn">📥 导出数据备份</button>
-          </div>
-          <div style="margin-top:12px;font-size:12px;color:#999;line-height:1.8;">
-            💡 数据同时保存在浏览器本地和 Vercel KV 云端，多设备（手机/电脑）访问同一域名可自动同步。<br>
-            建议定期导出 JSON 备份，防止意外数据丢失。
-          </div>
-        </div>
-      </div>
-
-    </main>
-  </div>
-
-  <!-- ===== 添加学生弹窗 ===== -->
-  <div class="modal-overlay" id="addStudentModal">
-    <div class="modal">
-      <h3>添加学生</h3>
-      <div class="form-group">
-        <label>学生姓名（支持批量添加，用逗号或空格分隔多个姓名）</label>
-        <textarea id="studentNameInput" rows="3" placeholder="张三，李四，王五&#10;或每行一个姓名"></textarea>
-      </div>
-      <div class="modal-actions">
-        <button class="btn btn-gray" id="addStudentCancel">取消</button>
-        <button class="btn btn-primary" id="addStudentConfirm">添加</button>
-      </div>
     </div>
-  </div>
 
-  <!-- ===== Toast 提示 ===== -->
-  <div class="toast" id="toast"></div>
+    <!-- ========== 页面3：教案管理 ========== -->
+    <div class="panel" id="lessonPlan">
+        <div class="card">
+            <h3>编写新教案</h3>
+            <div class="form-line">
+                <label>教案标题：</label>
+                <input id="lpTitle" type="text" placeholder="例如：五年级篮球运球教案">
+            </div>
+            <div class="form-line">
+                <label>适用班级：</label>
+                <input id="lpClass" type="text" placeholder="例如：五年级2班">
+            </div>
+            <div class="form-line">
+                <label>教案内容：</label>
+                <textarea id="lpContent" placeholder="在此编写完整教案..."></textarea>
+            </div>
+            <div class="btn-row">
+                <button id="lpSaveBtn">保存教案</button>
+                <button id="lpClearBtn" class="gray">清空输入</button>
+            </div>
+        </div>
+        <div class="card" style="margin-top:14px;">
+            <h3>历史教案</h3>
+            <div id="lpList"></div>
+        </div>
+    </div>
 
-  <!-- ===== JS 模块（按依赖顺序加载） ===== -->
-  <script src="/js/store.js"></script>
-  <script src="/js/calendar.js"></script>
-  <script src="/js/rollcall.js"></script>
-  <script src="/js/lessonlog.js"></script>
-  <script src="/js/aiChat.js"></script>
-  <script src="/js/stats.js"></script>
-  <script src="/js/app.js"></script>
+    <!-- ========== 页面4：课堂活动资源 ========== -->
+    <div class="panel" id="activity">
+        <div class="card">
+            <h3>添加活动资源</h3>
+            <div class="form-line">
+                <label>活动名称：</label>
+                <input id="actTitle" type="text" placeholder="例如：抓人游戏">
+            </div>
+            <div class="form-line">
+                <label>活动类型：</label>
+                <select id="actCategory">
+                    <option value="热身">热身活动</option>
+                    <option value="游戏">课堂游戏</option>
+                    <option value="练习">趣味练习</option>
+                    <option value="放松">放松活动</option>
+                    <option value="其他">其他</option>
+                </select>
+            </div>
+            <div class="form-line">
+                <label>活动玩法/规则：</label>
+                <textarea id="actContent" placeholder="描述活动规则、玩法、注意事项..."></textarea>
+            </div>
+            <div class="btn-row">
+                <button id="actSaveBtn">保存活动</button>
+                <button id="actClearBtn" class="gray">清空输入</button>
+            </div>
+        </div>
+        <div class="card" style="margin-top:14px;">
+            <div class="activity-header">
+                <h3>活动资源库</h3>
+                <button id="actRandomBtn" class="random-btn">随机抽取一个活动</button>
+            </div>
+            <div id="actRandomResult" class="random-result"></div>
+            <div id="actList"></div>
+        </div>
+    </div>
 
+    <!-- ========== 页面5：学生名册管理 ========== -->
+    <div class="panel" id="roster">
+        <div class="card">
+            <h3>新建班级</h3>
+            <div class="form-line">
+                <label>班级名称：</label>
+                <input id="rosterClassName" type="text" placeholder="例如：五年级2班">
+            </div>
+            <div class="form-line">
+                <label>学生名单（每行一名）：</label>
+                <textarea id="rosterStudentText" placeholder="张三&#10;李四&#10;王五"></textarea>
+            </div>
+            <div class="btn-row">
+                <button id="rosterAddClassBtn">创建班级</button>
+            </div>
+        </div>
+        <div class="card" style="margin-top:14px;">
+            <h3>已有班级名册</h3>
+            <div id="rosterClassList"></div>
+        </div>
+    </div>
+
+    <!-- ========== 页面6：课时出勤统计 ========== -->
+    <div class="panel" id="stats">
+        <div class="card">
+            <div class="stats-header">
+                <h3>学期出勤与课时统计</h3>
+                <div class="stats-filter">
+                    <label>筛选班级：
+                        <select id="statsClassFilter">
+                            <option value="">全部班级</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+            <div id="statsSummary" class="stats-summary"></div>
+        </div>
+        <div class="card" style="margin-top:14px;">
+            <h4>出勤记录明细（按日期倒序，可编辑修正）</h4>
+            <div id="statsRecordList"></div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/store.js"></script>
+<script src="/js/calendar.js"></script>
+<script src="/js/rollcall.js"></script>
+<script src="/js/lessonlog.js"></script>
+<script src="/js/aiChat.js"></script>
+<script src="/js/stats.js"></script>
+<script src="/js/roster.js"></script>
+<script src="/js/lessonplan.js"></script>
+<script src="/js/activity.js"></script>
+<script src="/js/app.js"></script>
 </body>
 </html>
