@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Boozer Dad’s Sports Work</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>体育助教系统</h1>
+        <div class="sync-box">
+            <button id="syncBtn">云端同步</button>
+            <span id="syncStatus"></span>
+        </div>
+    </header>
+
+    <div class="tab-bar">
+        <button class="tab active" data-tab="calendarLog">课堂档案</button>
+        <button class="tab" data-tab="aiChat">AI助教</button>
+        <button class="tab" data-tab="stats">数据统计</button>
+    </div>
+
+    <!-- 课堂档案面板 -->
+    <div class="panel active" id="calendarLog">
+        <div class="row">
+            <div class="col-left">
+                <div class="calendar-wrap">
+                    <div class="cal-header">
+                        <button id="prevMonth">&lt;</button>
+                        <h2 id="calTitle"></h2>
+                        <button id="nextMonth">&gt;</button>
+                    </div>
+                    <div class="cal-week">一 二 三 四 五 六 日</div>
+                    <div id="calDays" class="cal-days"></div>
+                </div>
+            </div>
+            <div class="col-right">
+                <div class="day-info">
+                    <h3>当日记录：<span id="currentDateShow"></span></h3>
+                    <div class="form-line">
+                        <label>班级：</label>
+                        <input id="className" type="text" placeholder="例如：五年级2班">
+                    </div>
+                    <div class="form-line">
+                        <label>课时：</label>
+                        <input id="lessonNo" type="text" placeholder="第1课时">
+                    </div>
+                </div>
+                <div class="rollcall-block">
+                    <h4>点名签到</h4>
+                    <textarea id="studentText" placeholder="每行一名学生，粘贴名单"></textarea>
+                    <div class="btn-row">
+                        <button id="loadStudentBtn">载入名单</button>
+                        <button id="randomCallBtn">随机点名</button>
+                    </div>
+                    <div id="studentListBox" class="student-list"></div>
+                </div>
+                <div class="log-block">
+                    <h4>随堂手记</h4>
+                    <textarea id="lessonNote" placeholder="记录课堂情况、问题、心得..."></textarea>
+                    <div class="btn-row">
+                        <button id="saveNoteBtn">保存手记</button>
+                    </div>
+                    <div class="saved-ai-log-title">已存档AI教案</div>
+                    <div id="savedAiLogBox"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI对话面板 -->
+    <div class="panel" id="aiChat">
+        <div class="ai-top-bar">
+            <label>模型选择：
+                <select id="modelSelect">
+                    <option value="deepseek">DeepSeek（低成本构思小游戏）</option>
+                    <option value="doubao">豆包（撰写教案、温柔互动）</option>
+                </select>
+            </label>
+        </div>
+        <div id="chatBox" class="chat-box"></div>
+        <div class="chat-input-area">
+            <textarea id="chatInput" placeholder="描述你的需求：生成体育课教案、构思课堂游戏..."></textarea>
+            <div class="chat-btn-row">
+                <button id="sendChatBtn">发送提问</button>
+                <button id="saveLastAiBtn">将最后AI回答保存至当日记录</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 统计面板 -->
+    <div class="panel" id="stats">
+        <h3>学期出勤与课时统计</h3>
+        <div id="statResult"></div>
+    </div>
+</div>
+
+<script src="/js/store.js"></script>
+<script src="/js/calendar.js"></script>
+<script src="/js/rollcall.js"></script>
+<script src="/js/lessonlog.js"></script>
+<script src="/js/aiChat.js"></script>
+<script src="/js/stats.js"></script>
+<script src="/js/app.js"></script>
+</body>
+</html>
