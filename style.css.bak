@@ -1,0 +1,226 @@
+* {
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+body {
+    background:#f4f7fa;
+    color:#222;
+    line-height:1.55;
+}
+.container {
+    max-width:1300px;
+    margin:0 auto;
+    padding:14px;
+}
+header {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:12px;
+}
+.sync-box span {
+    font-size:13px;
+    margin-left:8px;
+    color:#555;
+}
+.tab-bar {
+    display:flex;
+    gap:6px;
+    margin-bottom:14px;
+}
+.tab {
+    padding:9px 16px;
+    border:none;
+    background:#dde4ec;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:15px;
+}
+.tab.active {
+    background:#2b7cd3;
+    color:#fff;
+}
+.panel {
+    display:none;
+}
+.panel.active {
+    display:block;
+}
+.row {
+    display:grid;
+    grid-template-columns:340px 1fr;
+    gap:16px;
+}
+.calendar-wrap {
+    background:#fff;
+    padding:14px;
+    border-radius:10px;
+    box-shadow:0 1px 4px #00000018;
+}
+.cal-header {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:10px;
+}
+.cal-header button {
+    border:none;
+    background:#e8edf3;
+    width:30px;
+    height:30px;
+    border-radius:6px;
+    cursor:pointer;
+}
+.cal-week {
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    text-align:center;
+    font-size:13px;
+    color:#666;
+    margin-bottom:6px;
+}
+.cal-days {
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:4px;
+}
+.cal-day {
+    aspect-ratio:1/1;
+    display:grid;
+    place-items:center;
+    font-size:14px;
+    border-radius:6px;
+    cursor:pointer;
+}
+.cal-day.empty {
+    cursor:default;
+}
+.cal-day.today {
+    background:#2b7cd3;
+    color:white;
+}
+.cal-day.hasLesson::after {
+    content:"";
+    width:5px;
+    height:5px;
+    border-radius:50%;
+    background:#23b968;
+    position:absolute;
+    margin-top:22px;
+}
+.col-right {
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+}
+.day-info,.rollcall-block,.log-block,.chat-box,.ai-top-bar,.chat-input-area {
+    background:#fff;
+    padding:14px;
+    border-radius:10px;
+    box-shadow:0 1px 4px #00000018;
+}
+.form-line {
+    margin:8px 0;
+}
+.form-line input {
+    width:100%;
+    margin-top:4px;
+    padding:8px;
+    border:1px solid #d8dde4;
+    border-radius:6px;
+}
+textarea {
+    width:100%;
+    min-height:90px;
+    padding:9px;
+    border:1px solid #d8dde4;
+    border-radius:7px;
+    resize:vertical;
+    margin:6px 0;
+}
+.btn-row {
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin:8px 0;
+}
+button {
+    padding:8px 14px;
+    border:none;
+    border-radius:7px;
+    cursor:pointer;
+    background:#2b7cd3;
+    color:#fff;
+}
+button.gray {
+    background:#99a4b2;
+}
+.student-list {
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+    margin-top:10px;
+}
+.student-item {
+    padding:5px 10px;
+    border-radius:5px;
+    background:#eef3f9;
+    cursor:pointer;
+    font-size:14px;
+}
+.student-item.absent {
+    background:#ffdede;
+}
+.saved-ai-log-title {
+    margin-top:12px;
+    font-weight:bold;
+}
+#savedAiLogBox {
+    margin-top:8px;
+    font-size:14px;
+    max-height:180px;
+    overflow:auto;
+}
+.chat-box {
+    min-height:320px;
+    max-height:420px;
+    overflow-y:auto;
+    margin-bottom:12px;
+}
+.msg {
+    margin:8px 0;
+    padding:9px 12px;
+    border-radius:9px;
+    max-width:86%;
+}
+.msg.user {
+    background:#2b7cd3;
+    color:#fff;
+    margin-left:auto;
+}
+.msg.ai {
+    background:#eef3f9;
+    color:#222;
+    margin-right:auto;
+}
+.ai-top-bar {
+    margin-bottom:12px;
+}
+#modelSelect {
+    padding:6px;
+    border-radius:6px;
+    border:1px solid #d8dde4;
+}
+#statResult {
+    background:#fff;
+    padding:16px;
+    border-radius:10px;
+    box-shadow:0 1px 4px #00000018;
+}
+@media(max-width:900px){
+    .row {
+        grid-template-columns:1fr;
+    }
+}

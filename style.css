@@ -1,226 +1,704 @@
 * {
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 body {
-    background:#f4f7fa;
-    color:#222;
-    line-height:1.55;
+    background: #f4f7fa;
+    color: #222;
+    line-height: 1.55;
 }
 .container {
-    max-width:1300px;
-    margin:0 auto;
-    padding:14px;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 14px;
 }
+
+/* ===== 头部 ===== */
 header {
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+header h1 {
+    font-size: 22px;
+    color: #1a3a5c;
+}
+.sync-box {
+    display: flex;
+    align-items: center;
 }
 .sync-box span {
-    font-size:13px;
-    margin-left:8px;
-    color:#555;
+    font-size: 13px;
+    margin-left: 8px;
+    color: #555;
 }
+
+/* ===== 卡片通用 ===== */
+.card {
+    background: #fff;
+    padding: 14px;
+    border-radius: 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+/* ===== 标签导航 ===== */
 .tab-bar {
-    display:flex;
-    gap:6px;
-    margin-bottom:14px;
+    display: flex;
+    gap: 6px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
 }
 .tab {
-    padding:9px 16px;
-    border:none;
-    background:#dde4ec;
-    border-radius:8px;
-    cursor:pointer;
-    font-size:15px;
+    padding: 9px 16px;
+    border: none;
+    background: #dde4ec;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    color: #333;
+    transition: all 0.2s;
+}
+.tab:hover {
+    background: #c8d3e0;
 }
 .tab.active {
-    background:#2b7cd3;
-    color:#fff;
+    background: #2b7cd3;
+    color: #fff;
 }
 .panel {
-    display:none;
+    display: none;
 }
 .panel.active {
-    display:block;
+    display: block;
 }
+
+/* ===== 首页布局 ===== */
 .row {
-    display:grid;
-    grid-template-columns:340px 1fr;
-    gap:16px;
-}
-.calendar-wrap {
-    background:#fff;
-    padding:14px;
-    border-radius:10px;
-    box-shadow:0 1px 4px #00000018;
-}
-.cal-header {
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:10px;
-}
-.cal-header button {
-    border:none;
-    background:#e8edf3;
-    width:30px;
-    height:30px;
-    border-radius:6px;
-    cursor:pointer;
-}
-.cal-week {
-    display:grid;
-    grid-template-columns:repeat(7,1fr);
-    text-align:center;
-    font-size:13px;
-    color:#666;
-    margin-bottom:6px;
-}
-.cal-days {
-    display:grid;
-    grid-template-columns:repeat(7,1fr);
-    gap:4px;
-}
-.cal-day {
-    aspect-ratio:1/1;
-    display:grid;
-    place-items:center;
-    font-size:14px;
-    border-radius:6px;
-    cursor:pointer;
-}
-.cal-day.empty {
-    cursor:default;
-}
-.cal-day.today {
-    background:#2b7cd3;
-    color:white;
-}
-.cal-day.hasLesson::after {
-    content:"";
-    width:5px;
-    height:5px;
-    border-radius:50%;
-    background:#23b968;
-    position:absolute;
-    margin-top:22px;
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 16px;
 }
 .col-right {
-    display:flex;
-    flex-direction:column;
-    gap:14px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
 }
-.day-info,.rollcall-block,.log-block,.chat-box,.ai-top-bar,.chat-input-area {
-    background:#fff;
-    padding:14px;
-    border-radius:10px;
-    box-shadow:0 1px 4px #00000018;
+
+/* ===== 日历 ===== */
+.calendar-wrap {
+    background: #fff;
 }
+.cal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.cal-header h2 {
+    font-size: 16px;
+}
+.cal-header button {
+    border: none;
+    background: #e8edf3;
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+}
+.cal-week {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+.cal-week span {
+    padding: 4px 0;
+}
+.cal-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+}
+.cal-day {
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    transition: background 0.15s;
+}
+.cal-day:hover {
+    background: #e8f0fe;
+}
+.cal-day.empty {
+    cursor: default;
+    background: transparent;
+}
+.cal-day.today {
+    background: #2b7cd3;
+    color: white;
+    font-weight: bold;
+}
+.cal-day.selected {
+    background: #74a8e8;
+    color: white;
+}
+.cal-day.hasLesson::after {
+    content: "";
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #23b968;
+    position: absolute;
+    bottom: 4px;
+}
+
+/* ===== 表单 ===== */
 .form-line {
-    margin:8px 0;
+    margin: 8px 0;
 }
-.form-line input {
-    width:100%;
-    margin-top:4px;
-    padding:8px;
-    border:1px solid #d8dde4;
-    border-radius:6px;
+.form-line label {
+    display: block;
+    font-size: 14px;
+    color: #444;
+    margin-bottom: 4px;
+}
+.form-line input[type="text"],
+.form-line select,
+.form-line textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #d8dde4;
+    border-radius: 6px;
+    font-size: 14px;
+}
+.form-line input[type="checkbox"] {
+    margin-right: 6px;
 }
 textarea {
-    width:100%;
-    min-height:90px;
-    padding:9px;
-    border:1px solid #d8dde4;
-    border-radius:7px;
-    resize:vertical;
-    margin:6px 0;
+    width: 100%;
+    min-height: 90px;
+    padding: 9px;
+    border: 1px solid #d8dde4;
+    border-radius: 7px;
+    resize: vertical;
+    margin: 6px 0;
+    font-size: 14px;
 }
+
+/* ===== 按钮 ===== */
 .btn-row {
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
-    margin:8px 0;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 8px 0;
 }
 button {
-    padding:8px 14px;
-    border:none;
-    border-radius:7px;
-    cursor:pointer;
-    background:#2b7cd3;
-    color:#fff;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    background: #2b7cd3;
+    color: #fff;
+    font-size: 14px;
+    transition: opacity 0.15s;
+}
+button:hover {
+    opacity: 0.88;
 }
 button.gray {
-    background:#99a4b2;
+    background: #99a4b2;
 }
-.student-list {
-    display:flex;
-    flex-wrap:wrap;
-    gap:7px;
-    margin-top:10px;
+button.danger {
+    background: #dd4444;
 }
-.student-item {
-    padding:5px 10px;
-    border-radius:5px;
-    background:#eef3f9;
-    cursor:pointer;
-    font-size:14px;
+button.success {
+    background: #23b968;
 }
-.student-item.absent {
-    background:#ffdede;
+
+/* ===== 顺序点名区 ===== */
+.rollcall-seq-area {
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #f8fafc;
+    border-radius: 8px;
+    margin: 10px 0;
+    padding: 16px;
 }
+.seq-placeholder {
+    color: #888;
+    font-size: 14px;
+}
+.seq-progress {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 8px;
+}
+.seq-student-name {
+    font-size: 36px;
+    font-weight: bold;
+    color: #1a3a5c;
+    margin: 10px 0;
+    text-align: center;
+}
+.seq-buttons {
+    display: flex;
+    gap: 20px;
+    margin-top: 10px;
+}
+.seq-btn-present,
+.seq-btn-absent {
+    padding: 14px 36px;
+    font-size: 20px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+.seq-btn-present {
+    background: #23b968;
+}
+.seq-btn-absent {
+    background: #dd4444;
+}
+.seq-done {
+    font-size: 20px;
+    color: #23b968;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* ===== 出勤纠错列表 ===== */
+.rollcall-review {
+    margin-top: 14px;
+    border-top: 1px solid #eee;
+    padding-top: 12px;
+}
+.review-title {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 8px;
+}
+.review-list {
+    max-height: 260px;
+    overflow-y: auto;
+}
+.review-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 8px;
+    border-radius: 5px;
+    margin-bottom: 4px;
+    background: #f8fafc;
+}
+.review-item.present {
+    border-left: 3px solid #23b968;
+}
+.review-item.absent {
+    border-left: 3px solid #dd4444;
+    background: #fff5f5;
+}
+.review-name {
+    font-size: 14px;
+    flex: 1;
+}
+.review-status {
+    font-size: 12px;
+    margin-right: 10px;
+    font-weight: bold;
+}
+.review-status.present {
+    color: #23b968;
+}
+.review-status.absent {
+    color: #dd4444;
+}
+.review-toggle-btn {
+    padding: 4px 10px;
+    font-size: 12px;
+    border-radius: 5px;
+}
+
+/* ===== 手记 & AI存档 ===== */
 .saved-ai-log-title {
-    margin-top:12px;
-    font-weight:bold;
+    margin-top: 12px;
+    font-weight: bold;
+    font-size: 14px;
 }
 #savedAiLogBox {
-    margin-top:8px;
-    font-size:14px;
-    max-height:180px;
-    overflow:auto;
+    margin-top: 8px;
+    font-size: 14px;
+    max-height: 180px;
+    overflow: auto;
 }
-.chat-box {
-    min-height:320px;
-    max-height:420px;
-    overflow-y:auto;
-    margin-bottom:12px;
+.ai-log-item {
+    border-bottom: 1px solid #eee;
+    padding: 6px 0;
 }
-.msg {
-    margin:8px 0;
-    padding:9px 12px;
-    border-radius:9px;
-    max-width:86%;
+.ai-log-time {
+    font-size: 12px;
+    color: #666;
 }
-.msg.user {
-    background:#2b7cd3;
-    color:#fff;
-    margin-left:auto;
-}
-.msg.ai {
-    background:#eef3f9;
-    color:#222;
-    margin-right:auto;
-}
+
+/* ===== AI对话 ===== */
 .ai-top-bar {
-    margin-bottom:12px;
+    margin-bottom: 12px;
 }
 #modelSelect {
-    padding:6px;
-    border-radius:6px;
-    border:1px solid #d8dde4;
+    padding: 6px;
+    border-radius: 6px;
+    border: 1px solid #d8dde4;
+    font-size: 14px;
 }
-#statResult {
-    background:#fff;
-    padding:16px;
-    border-radius:10px;
-    box-shadow:0 1px 4px #00000018;
+.chat-box {
+    min-height: 320px;
+    max-height: 420px;
+    overflow-y: auto;
+    margin-bottom: 12px;
 }
-@media(max-width:900px){
+.msg {
+    margin: 8px 0;
+    padding: 9px 12px;
+    border-radius: 9px;
+    max-width: 86%;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+.msg.user {
+    background: #2b7cd3;
+    color: #fff;
+    margin-left: auto;
+}
+.msg.ai {
+    background: #eef3f9;
+    color: #222;
+    margin-right: auto;
+}
+.chat-input-area {
+    margin-bottom: 12px;
+}
+.chat-btn-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+/* ===== 教案管理 ===== */
+.lesson-plan-item {
+    border: 1px solid #e8edf3;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 10px;
+    background: #fafbfc;
+}
+.lp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 6px;
+}
+.lp-title {
+    font-weight: bold;
+    font-size: 15px;
+    color: #1a3a5c;
+}
+.lp-meta {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 6px;
+}
+.lp-content {
+    font-size: 14px;
+    color: #333;
+    white-space: pre-wrap;
+    margin-top: 6px;
+}
+.lp-actions {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+}
+.lp-actions button {
+    padding: 4px 10px;
+    font-size: 12px;
+}
+
+/* ===== 课堂活动资源 ===== */
+.activity-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.random-btn {
+    background: #f39c12;
+}
+.random-result {
+    background: #fff8e6;
+    border: 1px solid #f39c12;
+    border-radius: 8px;
+    padding: 14px;
+    margin-bottom: 14px;
+    display: none;
+}
+.random-result.show {
+    display: block;
+}
+.random-result h4 {
+    color: #d68910;
+    margin-bottom: 6px;
+}
+.activity-item {
+    border: 1px solid #e8edf3;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 10px;
+    background: #fafbfc;
+}
+.act-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.act-title {
+    font-weight: bold;
+    font-size: 15px;
+    color: #1a3a5c;
+}
+.act-category {
+    display: inline-block;
+    background: #e8f0fe;
+    color: #2b7cd3;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    margin-left: 8px;
+}
+.act-content {
+    font-size: 14px;
+    color: #333;
+    white-space: pre-wrap;
+    margin-top: 6px;
+}
+.act-actions {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+}
+.act-actions button {
+    padding: 4px 10px;
+    font-size: 12px;
+}
+
+/* ===== 学生名册管理 ===== */
+.roster-class-item {
+    border: 1px solid #e8edf3;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 10px;
+    background: #fafbfc;
+}
+.roster-class-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+.roster-class-name {
+    font-weight: bold;
+    font-size: 16px;
+    color: #1a3a5c;
+}
+.roster-student-count {
+    font-size: 13px;
+    color: #888;
+    margin-left: 8px;
+}
+.roster-students {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 8px 0;
+}
+.roster-student-tag {
+    background: #eef3f9;
+    padding: 4px 10px;
+    border-radius: 5px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.roster-student-tag .remove-stu {
+    cursor: pointer;
+    color: #dd4444;
+    font-weight: bold;
+    font-size: 14px;
+}
+.roster-add-student {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+}
+.roster-add-student input {
+    flex: 1;
+    padding: 6px;
+    border: 1px solid #d8dde4;
+    border-radius: 5px;
+    font-size: 13px;
+}
+.roster-add-student button {
+    padding: 6px 12px;
+    font-size: 13px;
+}
+.roster-actions {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+}
+.roster-actions button {
+    padding: 4px 10px;
+    font-size: 12px;
+}
+
+/* ===== 课时出勤统计 ===== */
+.stats-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+.stats-filter label {
+    font-size: 14px;
+}
+.stats-filter select {
+    padding: 6px;
+    border-radius: 6px;
+    border: 1px solid #d8dde4;
+    font-size: 14px;
+    margin-left: 6px;
+}
+.stats-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin-bottom: 10px;
+}
+.stat-card {
+    background: #f8fafc;
+    border-radius: 8px;
+    padding: 14px;
+    text-align: center;
+}
+.stat-card .stat-num {
+    font-size: 28px;
+    font-weight: bold;
+    color: #2b7cd3;
+}
+.stat-card .stat-label {
+    font-size: 13px;
+    color: #666;
+    margin-top: 4px;
+}
+.stat-record-item {
+    border: 1px solid #e8edf3;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 10px;
+    background: #fafbfc;
+}
+.stat-record-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+.stat-record-date {
+    font-weight: bold;
+    font-size: 15px;
+    color: #1a3a5c;
+}
+.stat-record-class {
+    background: #e8f0fe;
+    color: #2b7cd3;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 13px;
+}
+.stat-record-cancelled {
+    background: #fff0f0;
+    color: #dd4444;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: bold;
+}
+.stat-record-info {
+    font-size: 13px;
+    color: #555;
+    margin-bottom: 6px;
+}
+.stat-record-absent-list {
+    font-size: 13px;
+    color: #dd4444;
+    margin-top: 4px;
+}
+.stat-record-actions {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+}
+.stat-record-actions button {
+    padding: 4px 10px;
+    font-size: 12px;
+}
+.stat-edit-area {
+    margin-top: 10px;
+    padding: 10px;
+    background: #fff;
+    border-radius: 6px;
+    border: 1px solid #e8edf3;
+}
+.stat-edit-students {
+    max-height: 200px;
+    overflow-y: auto;
+    margin: 8px 0;
+}
+
+/* ===== 响应式 ===== */
+@media (max-width: 900px) {
     .row {
-        grid-template-columns:1fr;
+        grid-template-columns: 1fr;
+    }
+    .seq-student-name {
+        font-size: 28px;
+    }
+    .seq-btn-present,
+    .seq-btn-absent {
+        padding: 12px 24px;
+        font-size: 17px;
+    }
+    .tab-bar {
+        gap: 4px;
+    }
+    .tab {
+        padding: 8px 12px;
+        font-size: 14px;
     }
 }
