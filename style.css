@@ -1027,3 +1027,13 @@ button.success {
 [data-theme="dark"] .activity-modal-body {
     color: #c9cdd4;
 }
+/* ===== 页脚免责说明（明暗双主题） ===== */
+.footer-note {
+    font-size: 12px;
+    text-align: center;
+    padding: 16px 8px;
+    color: #666;
+}
+[data-theme="dark"] .footer-note {
+    color: #9ca3af;
+}
