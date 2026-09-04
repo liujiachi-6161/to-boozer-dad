@@ -15,7 +15,6 @@
             <span id="syncStatus"></span>
         </div>
     </header>
-
     <!-- 顶部导航 6个标签 -->
     <div class="tab-bar">
         <button class="tab active" data-tab="calendarLog">课堂档案</button>
@@ -25,7 +24,6 @@
         <button class="tab" data-tab="roster">学生名册管理</button>
         <button class="tab" data-tab="stats">课时出勤统计</button>
     </div>
-
     <!-- ========== 页面1：课堂档案（首页） ========== -->
     <div class="panel active" id="calendarLog">
         <div class="row">
@@ -43,7 +41,6 @@
                     <div id="calDays" class="cal-days"></div>
                 </div>
             </div>
-
             <!-- 右侧：当日记录 + 点名 + 手记 -->
             <div class="col-right">
                 <!-- 当日基本信息 -->
@@ -65,7 +62,6 @@
                         </label>
                     </div>
                 </div>
-
                 <!-- 顺序点名区 -->
                 <div class="rollcall-block card">
                     <h4>点名签到</h4>
@@ -77,14 +73,12 @@
                         <button id="resetRollCallBtn" class="gray">重新点名</button>
                         <button id="saveAttendanceBtn">保存本次出勤</button>
                     </div>
-
                     <!-- 下方汇总纠错列表 -->
                     <div class="rollcall-review" id="rollcallReview">
                         <div class="review-title">出勤明细（点错可在此修正，仅改状态，不能改名单）</div>
                         <div id="reviewList" class="review-list"></div>
                     </div>
                 </div>
-
                 <!-- 随堂手记 -->
                 <div class="log-block card">
                     <h4>随堂手记</h4>
@@ -98,17 +92,8 @@
             </div>
         </div>
     </div>
-
     <!-- ========== 页面2：AI助教 ========== -->
     <div class="panel" id="aiChat">
-        <div class="ai-top-bar card">
-            <label>模型选择：
-                <select id="modelSelect">
-                    <option value="deepseek">DeepSeek</option>
-                    <option value="doubao">豆包</option>
-                </select>
-            </label>
-        </div>
         <div id="chatBox" class="chat-box card"></div>
         <div class="chat-input-area card">
             <textarea id="chatInput" placeholder="描述你的需求：生成体育课教案、构思课堂游戏..."></textarea>
@@ -118,7 +103,6 @@
             </div>
         </div>
     </div>
-
     <!-- ========== 页面3：教案管理 ========== -->
     <div class="panel" id="lessonPlan">
         <div class="card">
@@ -145,7 +129,6 @@
             <div id="lpList"></div>
         </div>
     </div>
-
     <!-- ========== 页面4：课堂活动资源 ========== -->
     <div class="panel" id="activity">
         <div class="card">
@@ -182,7 +165,6 @@
             <div id="actList"></div>
         </div>
     </div>
-
     <!-- ========== 页面5：学生名册管理 ========== -->
     <div class="panel" id="roster">
         <div class="card">
@@ -204,7 +186,6 @@
             <div id="rosterClassList"></div>
         </div>
     </div>
-
     <!-- ========== 页面6：课时出勤统计 ========== -->
     <div class="panel" id="stats">
         <div class="card">
@@ -226,7 +207,6 @@
         </div>
     </div>
 </div>
-
 <script src="/js/store.js"></script>
 <script src="/js/calendar.js"></script>
 <script src="/js/rollcall.js"></script>

@@ -9,7 +9,6 @@ export default async function handler(req, res) {
       content:"你是一名小学体育助教。你的工作范围仅限于体育课相关内容：撰写体育教案、设计课堂游戏与体能练习、课堂点名管理、运动安全提示、学生体能发展建议。只围绕体育教学给出务实有效详细的文字方案，询问时给出职业有关的精准回答,不含糊不清,专注教学内容本身，执行任务时若遇到不明白,要耐心的一步一步引导,不要额外生成程序、页面类内容。"
     };
     const sendList = [systemPrompt, ...messages];
-
     const apiKey = process.env.DEEPSEEK_APIKEY;
     if (!apiKey) {
       return res.status(500).json({ ok: false, msg:"缺少DeepSeek密钥" });
