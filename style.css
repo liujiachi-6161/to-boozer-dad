@@ -854,3 +854,176 @@ button.success {
     background: #e8edf3;
     color: #333;
 }
+/* ===== 活动资源卡片网格 ===== */
+.activity-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+}
+.activity-card {
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+.activity-card:hover {
+    transform: translateY(-2px);
+}
+.activity-card-inner {
+    background: #fff;
+    border: 1px solid #e8edf3;
+    border-radius: 10px;
+    padding: 14px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.15s;
+}
+.activity-card:hover .activity-card-inner {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.activity-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+    gap: 8px;
+}
+.activity-card-title {
+    font-weight: bold;
+    font-size: 15px;
+    color: #1a3a5c;
+    line-height: 1.3;
+}
+.activity-card-preview {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.5;
+    flex: 1;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+.activity-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 8px;
+}
+.activity-card-hint {
+    font-size: 12px;
+    color: #999;
+}
+.activity-card-del {
+    padding: 4px 10px;
+    font-size: 12px;
+}
+/* ===== 活动详情弹窗 ===== */
+.activity-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+}
+.activity-modal.show {
+    display: block;
+}
+.activity-modal-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+}
+.activity-modal-content {
+    position: relative;
+    max-width: 560px;
+    margin: 60px auto;
+    background: #fff;
+    border-radius: 12px;
+    padding: 24px;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+    animation: modalSlideIn 0.2s ease;
+}
+@keyframes modalSlideIn {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+.activity-modal-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: #f0f0f0;
+    color: #666;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    padding: 0;
+    font-size: 18px;
+    line-height: 1;
+}
+.activity-modal-close:hover {
+    background: #e0e0e0;
+}
+.activity-modal-title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #1a3a5c;
+    margin-bottom: 8px;
+    padding-right: 40px;
+}
+.activity-modal-category {
+    display: inline-block;
+    background: #e8f0fe;
+    color: #2b7cd3;
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 13px;
+    margin-bottom: 16px;
+}
+.activity-modal-body {
+    font-size: 15px;
+    color: #333;
+    line-height: 1.7;
+    white-space: pre-wrap;
+}
+/* ===== 暗色模式 - 活动卡片 & 弹窗 ===== */
+[data-theme="dark"] .activity-card-inner {
+    background: #252830;
+    border: 1px solid #333842;
+}
+[data-theme="dark"] .activity-card-title {
+    color: #7ab8f5;
+}
+[data-theme="dark"] .activity-card-preview {
+    color: #9ca3af;
+}
+[data-theme="dark"] .activity-card-footer {
+    border-top: 1px solid #333842;
+}
+[data-theme="dark"] .activity-card-hint {
+    color: #6b7280;
+}
+[data-theme="dark"] .activity-modal-content {
+    background: #1c1f26;
+}
+[data-theme="dark"] .activity-modal-close {
+    background: #2a2e37;
+    color: #9ca3af;
+}
+[data-theme="dark"] .activity-modal-close:hover {
+    background: #353a45;
+}
+[data-theme="dark"] .activity-modal-title {
+    color: #7ab8f5;
+}
+[data-theme="dark"] .activity-modal-category {
+    background: #1e3a5c;
+    color: #7ab8f5;
+}
+[data-theme="dark"] .activity-modal-body {
+    color: #c9cdd4;
+}
