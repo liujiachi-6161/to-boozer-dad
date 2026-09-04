@@ -14,7 +14,6 @@ body {
     margin: 0 auto;
     padding: 14px;
 }
-
 /* ===== 头部 ===== */
 header {
     display: flex;
@@ -35,7 +34,6 @@ header h1 {
     margin-left: 8px;
     color: #555;
 }
-
 /* ===== 卡片通用 ===== */
 .card {
     background: #fff;
@@ -43,7 +41,6 @@ header h1 {
     border-radius: 10px;
     box-shadow: 0 1px 4px rgba(0,0,0,0.08);
 }
-
 /* ===== 标签导航 ===== */
 .tab-bar {
     display: flex;
@@ -74,7 +71,6 @@ header h1 {
 .panel.active {
     display: block;
 }
-
 /* ===== 首页布局 ===== */
 .row {
     display: grid;
@@ -86,7 +82,6 @@ header h1 {
     flex-direction: column;
     gap: 14px;
 }
-
 /* ===== 日历 ===== */
 .calendar-wrap {
     background: #fff;
@@ -162,7 +157,6 @@ header h1 {
     position: absolute;
     bottom: 4px;
 }
-
 /* ===== 表单 ===== */
 .form-line {
     margin: 8px 0;
@@ -195,7 +189,6 @@ textarea {
     margin: 6px 0;
     font-size: 14px;
 }
-
 /* ===== 按钮 ===== */
 .btn-row {
     display: flex;
@@ -225,7 +218,6 @@ button.danger {
 button.success {
     background: #23b968;
 }
-
 /* ===== 顺序点名区 ===== */
 .rollcall-seq-area {
     min-height: 120px;
@@ -278,7 +270,6 @@ button.success {
     font-weight: bold;
     text-align: center;
 }
-
 /* ===== 出勤纠错列表 ===== */
 .rollcall-review {
     margin-top: 14px;
@@ -330,7 +321,6 @@ button.success {
     font-size: 12px;
     border-radius: 5px;
 }
-
 /* ===== 手记 & AI存档 ===== */
 .saved-ai-log-title {
     margin-top: 12px;
@@ -351,7 +341,6 @@ button.success {
     font-size: 12px;
     color: #666;
 }
-
 /* ===== AI对话 ===== */
 .ai-top-bar {
     margin-bottom: 12px;
@@ -394,7 +383,6 @@ button.success {
     gap: 8px;
     flex-wrap: wrap;
 }
-
 /* ===== 教案管理 ===== */
 .lesson-plan-item {
     border: 1px solid #e8edf3;
@@ -434,7 +422,6 @@ button.success {
     padding: 4px 10px;
     font-size: 12px;
 }
-
 /* ===== 课堂活动资源 ===== */
 .activity-header {
     display: flex;
@@ -501,7 +488,6 @@ button.success {
     padding: 4px 10px;
     font-size: 12px;
 }
-
 /* ===== 学生名册管理 ===== */
 .roster-class-item {
     border: 1px solid #e8edf3;
@@ -572,7 +558,6 @@ button.success {
     padding: 4px 10px;
     font-size: 12px;
 }
-
 /* ===== 课时出勤统计 ===== */
 .stats-header {
     display: flex;
@@ -680,7 +665,6 @@ button.success {
     overflow-y: auto;
     margin: 8px 0;
 }
-
 /* ===== 响应式 ===== */
 @media (max-width: 900px) {
     .row {
@@ -701,4 +685,172 @@ button.success {
         padding: 8px 12px;
         font-size: 14px;
     }
+}
+/* ===== 暗色模式 ===== */
+[data-theme="dark"] {
+    color-scheme: dark;
+}
+[data-theme="dark"] body {
+    background: #0f1115;
+    color: #e4e6eb;
+}
+[data-theme="dark"] header h1 {
+    color: #7ab8f5;
+}
+[data-theme="dark"] .sync-box span {
+    color: #9ca3af;
+}
+[data-theme="dark"] .card {
+    background: #1c1f26;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+}
+[data-theme="dark"] .tab {
+    background: #2a2e37;
+    color: #c9cdd4;
+}
+[data-theme="dark"] .tab:hover {
+    background: #353a45;
+}
+[data-theme="dark"] .tab.active {
+    background: #2b7cd3;
+    color: #fff;
+}
+[data-theme="dark"] .cal-header button {
+    background: #2a2e37;
+    color: #c9cdd4;
+}
+[data-theme="dark"] .cal-week {
+    color: #9ca3af;
+}
+[data-theme="dark"] .cal-day:hover {
+    background: #2a3a52;
+}
+[data-theme="dark"] .cal-day.empty {
+    background: transparent;
+}
+[data-theme="dark"] .form-line label {
+    color: #b0b5be;
+}
+[data-theme="dark"] .form-line input[type="text"],
+[data-theme="dark"] .form-line select,
+[data-theme="dark"] .form-line textarea,
+[data-theme="dark"] textarea,
+[data-theme="dark"] .stats-filter select,
+[data-theme="dark"] #modelSelect {
+    background: #252830;
+    border: 1px solid #3a3f4a;
+    color: #e4e6eb;
+}
+[data-theme="dark"] .rollcall-seq-area {
+    background: #252830;
+}
+[data-theme="dark"] .seq-placeholder {
+    color: #7c828d;
+}
+[data-theme="dark"] .seq-progress {
+    color: #9ca3af;
+}
+[data-theme="dark"] .seq-student-name {
+    color: #7ab8f5;
+}
+[data-theme="dark"] .rollcall-review {
+    border-top: 1px solid #333842;
+}
+[data-theme="dark"] .review-title {
+    color: #9ca3af;
+}
+[data-theme="dark"] .review-item {
+    background: #252830;
+}
+[data-theme="dark"] .review-item.absent {
+    background: #2d1f1f;
+}
+[data-theme="dark"] .saved-ai-log-title {
+    color: #c9cdd4;
+}
+[data-theme="dark"] .ai-log-item {
+    border-bottom: 1px solid #333842;
+}
+[data-theme="dark"] .ai-log-time {
+    color: #7c828d;
+}
+[data-theme="dark"] .msg.user {
+    background: #1e4a7a;
+    color: #fff;
+}
+[data-theme="dark"] .msg.ai {
+    background: #2a2e37;
+    color: #e4e6eb;
+}
+[data-theme="dark"] .lesson-plan-item,
+[data-theme="dark"] .activity-item,
+[data-theme="dark"] .roster-class-item,
+[data-theme="dark"] .stat-record-item {
+    background: #252830;
+    border: 1px solid #333842;
+}
+[data-theme="dark"] .lp-title,
+[data-theme="dark"] .act-title,
+[data-theme="dark"] .roster-class-name,
+[data-theme="dark"] .stat-record-date {
+    color: #7ab8f5;
+}
+[data-theme="dark"] .lp-meta {
+    color: #7c828d;
+}
+[data-theme="dark"] .lp-content,
+[data-theme="dark"] .act-content {
+    color: #c9cdd4;
+}
+[data-theme="dark"] .act-category {
+    background: #1e3a5c;
+    color: #7ab8f5;
+}
+[data-theme="dark"] .roster-student-tag {
+    background: #2a2e37;
+    color: #c9cdd4;
+}
+[data-theme="dark"] .roster-add-student input {
+    background: #252830;
+    border: 1px solid #3a3f4a;
+    color: #e4e6eb;
+}
+[data-theme="dark"] .stat-card {
+    background: #252830;
+}
+[data-theme="dark"] .stat-card .stat-num {
+    color: #7ab8f5;
+}
+[data-theme="dark"] .stat-card .stat-label {
+    color: #9ca3af;
+}
+[data-theme="dark"] .stat-record-class {
+    background: #1e3a5c;
+    color: #7ab8f5;
+}
+[data-theme="dark"] .stat-record-cancelled {
+    background: #2d1f1f;
+    color: #f08080;
+}
+[data-theme="dark"] .stat-record-info {
+    color: #9ca3af;
+}
+[data-theme="dark"] .stat-edit-area {
+    background: #252830;
+    border: 1px solid #333842;
+}
+[data-theme="dark"] .random-result {
+    background: #2d2618;
+    border: 1px solid #b8860b;
+}
+[data-theme="dark"] .random-result h4 {
+    color: #daa520;
+}
+[data-theme="dark"] #themeToggle {
+    background: #2a2e37;
+    color: #f0c040;
+}
+[data-theme="light"] #themeToggle {
+    background: #e8edf3;
+    color: #333;
 }
